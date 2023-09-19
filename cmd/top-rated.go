@@ -12,7 +12,7 @@ import (
 
 var topRatedCmd = &cobra.Command{
 	Use:   "top-rated",
-	Short: "Shows Top Rated movies in TMDB database.",
+	Short: "Shows Top Rated movies in TMDB database",
 	Long:  `Shows Top Rated movies in TMDB database.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		TopRated()

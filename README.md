@@ -15,6 +15,7 @@ Use "`tmdbcli` [command] --help" for more information about a command.
 ### Available Commands:
   - `completion`  Generate the autocompletion script for the specified shell
   - `help`        Help about any command
+  - `top-rated`   Shows Top Rated movies in TMDB database
   - `version`     Version of the tmdbcli
 
 ### Flags:
