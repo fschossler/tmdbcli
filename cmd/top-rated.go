@@ -12,13 +12,8 @@ import (
 
 var topRatedCmd = &cobra.Command{
 	Use:   "top-rated",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Shows Top Rated movies in TMDB database.",
+	Long:  `Shows Top Rated movies in TMDB database.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		TopRated()
 	},
@@ -26,16 +21,6 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(topRatedCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// topRatedCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// topRatedCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 var BEARER_TOKEN string = os.Getenv("BEARER_TOKEN")
@@ -51,6 +36,11 @@ type Results struct {
 }
 
 func TopRated() {
+
+	if BEARER_TOKEN == "" {
+		// fmt.Println("You need to create your API Key and put your your bearer token in the environment variable 'BEARER_TOKEN'.")
+		panic("You need to create your API Key and put your your bearer token in the environment variable 'BEARER_TOKEN'. Check more infos on how to do this in the docs.")
+	}
 
 	url := "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
 
