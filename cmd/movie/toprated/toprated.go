@@ -1,4 +1,4 @@
-package cmd
+package toprated
 
 import (
 	"encoding/json"
@@ -7,20 +7,17 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/fschossler/tmdbcli/cmd/movie"
 	"github.com/spf13/cobra"
 )
 
 var topRatedCmd = &cobra.Command{
-	Use:   "top-rated",
+	Use:   "toprated",
 	Short: "Shows Top Rated movies in TMDB database",
 	Long:  `Shows Top Rated movies in TMDB database.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		TopRated()
 	},
-}
-
-func init() {
-	rootCmd.AddCommand(topRatedCmd)
 }
 
 var BEARER_TOKEN string = os.Getenv("BEARER_TOKEN")
@@ -38,7 +35,6 @@ type Results struct {
 func TopRated() {
 
 	if BEARER_TOKEN == "" {
-		// fmt.Println("You need to create your API Key and put your your bearer token in the environment variable 'BEARER_TOKEN'.")
 		panic("You need to create your API Key and put your your bearer token in the environment variable 'BEARER_TOKEN'. Check more infos on how to do this in the docs.")
 	}
 
@@ -57,17 +53,21 @@ func TopRated() {
 	defer res.Body.Close()
 	body, _ := io.ReadAll(res.Body)
 
-	var movies Root
+	var movie Root
 
 	jsonText := string(body)
 
-	err2 := json.Unmarshal([]byte(jsonText), &movies)
+	err2 := json.Unmarshal([]byte(jsonText), &movie)
 	if err2 != nil {
 		fmt.Println(err2)
 	}
 
-	for _, value := range movies.Results {
+	for _, value := range movie.Results {
 		fmt.Println(value.OriginalTitle+":", value.VoteAverage)
 	}
 
+}
+
+func init() {
+	movie.MovieCmd.AddCommand(topRatedCmd)
 }
