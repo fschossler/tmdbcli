@@ -6,9 +6,9 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/fschossler/tmdbcli/cmd/movie"
+	"github.com/fschossler/tmdbcli/internal"
 	"github.com/spf13/cobra"
 )
 
@@ -24,8 +24,6 @@ var topRatedCmd = &cobra.Command{
 	},
 }
 
-var BEARER_TOKEN string = os.Getenv("BEARER_TOKEN")
-
 type Root struct {
 	Page    int
 	Results []Results
@@ -38,9 +36,7 @@ type Results struct {
 
 func TopRated() error {
 
-	if BEARER_TOKEN == "" {
-		panic("You need to create your API Key and put your your bearer token in the environment variable 'BEARER_TOKEN'. Check more infos on how to do this in the docs.")
-	}
+	BEARER_TOKEN := internal.ValidateBearerToken()
 
 	url := "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
 
@@ -53,8 +49,8 @@ func TopRated() error {
 	if err != nil {
 		return err
 	}
-
 	defer res.Body.Close()
+
 	body, _ := io.ReadAll(res.Body)
 
 	var movie Root
