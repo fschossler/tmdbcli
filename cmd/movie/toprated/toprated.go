@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 
@@ -16,7 +17,10 @@ var topRatedCmd = &cobra.Command{
 	Short: "Shows Top Rated movies in TMDB database",
 	Long:  `Shows Top Rated movies in TMDB database.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		TopRated()
+		err := TopRated()
+		if err != nil {
+			log.Fatal(err)
+		}
 	},
 }
 
@@ -32,7 +36,7 @@ type Results struct {
 	VoteAverage   float32 `json:"vote_average"`
 }
 
-func TopRated() {
+func TopRated() error {
 
 	if BEARER_TOKEN == "" {
 		panic("You need to create your API Key and put your your bearer token in the environment variable 'BEARER_TOKEN'. Check more infos on how to do this in the docs.")
@@ -47,7 +51,7 @@ func TopRated() {
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 
 	defer res.Body.Close()
@@ -59,13 +63,14 @@ func TopRated() {
 
 	err2 := json.Unmarshal([]byte(jsonText), &movie)
 	if err2 != nil {
-		fmt.Println(err2)
+		return err2
 	}
 
 	for _, value := range movie.Results {
 		fmt.Println(value.OriginalTitle+":", value.VoteAverage)
 	}
 
+	return nil
 }
 
 func init() {
