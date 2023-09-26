@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/fatih/color"
 	"github.com/fschossler/tmdbcli/cmd/movie"
 	"github.com/fschossler/tmdbcli/internal"
 	"github.com/spf13/cobra"
@@ -63,9 +64,14 @@ func TopRated() error {
 		return err
 	}
 
-	for _, value := range movie.Results {
-		fmt.Println(value.OriginalTitle+":", value.VoteAverage)
-		fmt.Println(value.Overview)
+	for _, movie := range movie.Results {
+		title := color.New(color.FgHiCyan)
+		voteAverage := color.New(color.FgGreen)
+
+		title.Print(movie.OriginalTitle + ": ")
+		voteAverage.Println(movie.VoteAverage)
+		fmt.Println(movie.Overview)
+		fmt.Println("")
 	}
 
 	return nil
