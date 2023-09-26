@@ -32,6 +32,7 @@ type Root struct {
 type Results struct {
 	OriginalTitle string  `json:"original_title"`
 	VoteAverage   float32 `json:"vote_average"`
+	Overview      string  `json:"overview"`
 }
 
 func TopRated() error {
@@ -64,6 +65,7 @@ func TopRated() error {
 
 	for _, value := range movie.Results {
 		fmt.Println(value.OriginalTitle+":", value.VoteAverage)
+		fmt.Println(value.Overview)
 	}
 
 	return nil
