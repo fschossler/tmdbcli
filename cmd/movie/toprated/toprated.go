@@ -31,9 +31,9 @@ type Root struct {
 }
 
 type Results struct {
-	OriginalTitle string  `json:"original_title"`
-	VoteAverage   float32 `json:"vote_average"`
-	Overview      string  `json:"overview"`
+	Title       string  `json:"title"`
+	VoteAverage float32 `json:"vote_average"`
+	Overview    string  `json:"overview"`
 }
 
 func TopRated() error {
@@ -68,7 +68,7 @@ func TopRated() error {
 		title := color.New(color.FgHiCyan)
 		voteAverage := color.New(color.FgGreen)
 
-		title.Print(movie.OriginalTitle + ": ")
+		title.Print(movie.Title + ": ")
 		voteAverage.Println(movie.VoteAverage)
 		fmt.Println(movie.Overview)
 		fmt.Println("")

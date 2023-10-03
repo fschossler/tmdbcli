@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/fatih/color"
 	"github.com/fschossler/tmdbcli/cmd/serie"
 	"github.com/fschossler/tmdbcli/internal"
 	"github.com/spf13/cobra"
@@ -30,8 +31,9 @@ type Root struct {
 }
 
 type Results struct {
-	OriginalName string  `json:"original_name"`
-	VoteAverage  float32 `json:"vote_average"`
+	Name        string  `json:"name"`
+	VoteAverage float32 `json:"vote_average"`
+	Overview    string  `json:"overview"`
 }
 
 func TopRated() error {
@@ -62,8 +64,14 @@ func TopRated() error {
 		return err
 	}
 
-	for _, value := range serie.Results {
-		fmt.Println(value.OriginalName+":", value.VoteAverage)
+	for _, movie := range serie.Results {
+		title := color.New(color.FgHiCyan)
+		voteAverage := color.New(color.FgGreen)
+
+		title.Print(movie.Name + ": ")
+		voteAverage.Println(movie.VoteAverage)
+		fmt.Println(movie.Overview)
+		fmt.Println("")
 	}
 
 	return nil
