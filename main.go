@@ -6,6 +6,7 @@ import (
 	_ "github.com/fschossler/tmdbcli/cmd/movie/toppopular"
 	_ "github.com/fschossler/tmdbcli/cmd/movie/toprated"
 	_ "github.com/fschossler/tmdbcli/cmd/serie"
+	_ "github.com/fschossler/tmdbcli/cmd/serie/toppopular"
 	_ "github.com/fschossler/tmdbcli/cmd/serie/toprated"
 	_ "github.com/fschossler/tmdbcli/cmd/version"
 )
