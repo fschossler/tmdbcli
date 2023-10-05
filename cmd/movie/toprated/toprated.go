@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/fatih/color"
+	"github.com/fschossler/tmdbcli/cmd"
 	"github.com/fschossler/tmdbcli/cmd/movie"
 	"github.com/fschossler/tmdbcli/internal"
 	"github.com/spf13/cobra"
@@ -40,7 +41,8 @@ func TopRated() error {
 
 	TMDB_CLI_BEARER_TOKEN := internal.ValidateBearerToken()
 
-	url := "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
+	language := cmd.Language
+	url := "https://api.themoviedb.org/3/movie/top_rated?language=" + language + "&page=1"
 
 	req, _ := http.NewRequest("GET", url, nil)
 

@@ -6,6 +6,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var Language string
+
 var RootCmd = &cobra.Command{
 	Use:   "tmdbcli",
 	Short: "A CLI created to get infos about movies in TMDB database.",
@@ -26,5 +28,5 @@ func Execute() {
 }
 
 func init() {
-	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	RootCmd.PersistentFlags().StringVarP(&Language, "language", "l", "en-US", "Output language of the CLI. Use the \"Language Code and Country Code\" pattern. Remember to put between quotes. Example: 'en-US'.")
 }
