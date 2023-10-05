@@ -38,14 +38,14 @@ type Results struct {
 
 func TopPopular() error {
 
-	BEARER_TOKEN := internal.ValidateBearerToken()
+	TMDB_CLI_BEARER_TOKEN := internal.ValidateBearerToken()
 
 	url := "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1"
 
 	req, _ := http.NewRequest("GET", url, nil)
 
 	req.Header.Add("accept", "application/json")
-	req.Header.Add("Authorization", "Bearer "+BEARER_TOKEN)
+	req.Header.Add("Authorization", "Bearer "+TMDB_CLI_BEARER_TOKEN)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
