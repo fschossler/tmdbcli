@@ -3,13 +3,9 @@ package toprated
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
-	"net/http"
-	"strconv"
 
 	"github.com/fatih/color"
-	"github.com/fschossler/tmdbcli/cmd"
 	"github.com/fschossler/tmdbcli/cmd/movie"
 	"github.com/fschossler/tmdbcli/internal"
 	"github.com/spf13/cobra"
@@ -40,30 +36,11 @@ type Results struct {
 
 func TopRated() error {
 
-	TMDB_CLI_BEARER_TOKEN := internal.ValidateBearerToken()
-
-	language := cmd.Language
-	page := cmd.Page
-	url := "https://api.themoviedb.org/3/movie/top_rated?language=" + language + "&page=" + strconv.Itoa(page) + ""
-
-	req, _ := http.NewRequest("GET", url, nil)
-
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("Authorization", "Bearer "+TMDB_CLI_BEARER_TOKEN)
-
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return err
-	}
-	defer res.Body.Close()
-
-	body, _ := io.ReadAll(res.Body)
+	jsonReturn := internal.RequestPath("/movie/top_rated")
 
 	var movie Root
 
-	jsonText := string(body)
-
-	err = json.Unmarshal([]byte(jsonText), &movie)
+	err := json.Unmarshal([]byte(jsonReturn), &movie)
 	if err != nil {
 		return err
 	}

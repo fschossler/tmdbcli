@@ -3,13 +3,9 @@ package toppopular
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
-	"net/http"
-	"strconv"
 
 	"github.com/fatih/color"
-	"github.com/fschossler/tmdbcli/cmd"
 	"github.com/fschossler/tmdbcli/cmd/serie"
 	"github.com/fschossler/tmdbcli/internal"
 	"github.com/spf13/cobra"
@@ -40,41 +36,22 @@ type Results struct {
 
 func TopPopular() error {
 
-	TMDB_CLI_BEARER_TOKEN := internal.ValidateBearerToken()
+	jsonReturn := internal.RequestPath("/tv/popular")
 
-	language := cmd.Language
-	page := cmd.Page
-	url := "https://api.themoviedb.org/3/tv/popular?language=" + language + "&page=" + strconv.Itoa(page) + ""
+	var serie Root
 
-	req, _ := http.NewRequest("GET", url, nil)
-
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("Authorization", "Bearer "+TMDB_CLI_BEARER_TOKEN)
-
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return err
-	}
-	defer res.Body.Close()
-
-	body, _ := io.ReadAll(res.Body)
-
-	var movie Root
-
-	jsonText := string(body)
-
-	err = json.Unmarshal([]byte(jsonText), &movie)
+	err := json.Unmarshal([]byte(jsonReturn), &serie)
 	if err != nil {
 		return err
 	}
 
-	for _, movie := range movie.Results {
+	for _, serie := range serie.Results {
 		title := color.New(color.FgHiCyan)
 		voteAverage := color.New(color.FgGreen)
 
-		title.Print(movie.Name + ": ")
-		voteAverage.Println(movie.VoteAverage)
-		fmt.Println(movie.Overview)
+		title.Print(serie.Name + ": ")
+		voteAverage.Println(serie.VoteAverage)
+		fmt.Println(serie.Overview)
 		fmt.Println("")
 	}
 
