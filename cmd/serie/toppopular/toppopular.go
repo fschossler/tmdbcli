@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/fatih/color"
 	"github.com/fschossler/tmdbcli/cmd"
@@ -42,7 +43,8 @@ func TopPopular() error {
 	TMDB_CLI_BEARER_TOKEN := internal.ValidateBearerToken()
 
 	language := cmd.Language
-	url := "https://api.themoviedb.org/3/tv/popular?language=" + language + "&page=1"
+	page := cmd.Page
+	url := "https://api.themoviedb.org/3/tv/popular?language=" + language + "&page=" + strconv.Itoa(page) + ""
 
 	req, _ := http.NewRequest("GET", url, nil)
 

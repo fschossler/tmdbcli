@@ -6,7 +6,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Language string
+var (
+	Language string
+	Page     int
+)
 
 var RootCmd = &cobra.Command{
 	Use:   "tmdbcli",
@@ -29,4 +32,5 @@ func Execute() {
 
 func init() {
 	RootCmd.PersistentFlags().StringVarP(&Language, "language", "l", "en-US", "Output language of the CLI. Use the \"Language Code and Country Code\" pattern. Remember to put between quotes. Example: 'en-US'.")
+	RootCmd.PersistentFlags().IntVarP(&Page, "page", "p", 1, "Number of the page to return the results. Every page show 20 results.")
 }
