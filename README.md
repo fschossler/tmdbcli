@@ -8,7 +8,7 @@ With 'tmdbcli' you can get infos about:
 - Movie infos
 - And more.
 
-This project **IS NOT** created by [TMDB (The Movie Database)](https://www.themoviedb.org/) team. This project was created just to people that really like movies, series and love CLI too.
+This project **IS NOT** created by [TMDB (The Movie Database)](https://www.themoviedb.org/) team. This project was created just to people that really like movies, series and love CLI too. Ensure your use case does not violate their API terms of service.
 
 ## Requirements
 
