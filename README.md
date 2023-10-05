@@ -12,9 +12,9 @@ This project **IS NOT** created by [TMDB (The Movie Database)](https://www.themo
 
 ## Requirements
 
-- Create an API Key and put the value of the **API Read Access Token (not the API Key)**
+- TMDB's API Key 
     - Documentation that have information about API Key creation: https://developer.themoviedb.org/docs/getting-started
-- Put the value of the **API Read Access Token (not the API Key)** in the environment variable `TMDB_CLI_BEARER_TOKEN`
+- `TMDB_CLI_BEARER_TOKEN` environment variable with the value of **API Read Access Token (not the API Key)**
     - This environment variable can be loaded from an `.env`, `.bashrc`, `.zshrc` files or any another way that you want and feel confortable.
 
 ## Install
