@@ -60,10 +60,10 @@ extract_tar_gz() {
 check_sudo
 
 # Construct the URL for the release asset based on the OS and version
-if [[ "$VERSION" == "latest" ]]; then
-  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/latest/download/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
+if [ "$VERSION" == "latest" ]; then
+  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/latest/download/tmdbcli-$OS-amd64.tar.gz"
 else
-  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
+  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli-$VERSION-$OS-amd64.tar.gz"
 fi
 
 # Define the installation directory (where the binary will be placed)
