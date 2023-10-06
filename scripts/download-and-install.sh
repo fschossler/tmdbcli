@@ -15,16 +15,6 @@ OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 DEFAULT_VERSION="latest"
 VERSION="${1:-$DEFAULT_VERSION}"
 
-# Construct the URL for the release asset based on the OS and version
-if [ "$VERSION" == "latest" ]; then
-  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/latest/download/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
-else
-  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
-fi
-
-# Define the installation directory (where the binary will be placed)
-INSTALL_DIR="/usr/local/bin"
-
 # Function to handle errors and exit
 handle_error() {
   local error_message="$1"
@@ -68,6 +58,16 @@ extract_tar_gz() {
 
 # Check if root privileges are required
 check_sudo
+
+# Construct the URL for the release asset based on the OS and version
+if [[ "$VERSION" == "latest" ]]; then
+  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/latest/download/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
+else
+  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
+fi
+
+# Define the installation directory (where the binary will be placed)
+INSTALL_DIR="/usr/local/bin"
 
 # Download the release asset
 echo "📥 Downloading tmdbcli..."
