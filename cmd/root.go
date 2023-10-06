@@ -13,12 +13,12 @@ var (
 
 var RootCmd = &cobra.Command{
 	Use:   "tmdbcli",
-	Short: "A CLI created to get infos about movies in TMDB database.",
-	Long: `A CLI created to get infos about movies in TMDB database. 
+	Short: "A CLI created to get infos about movies and series in TMDB database 📽️",
+	Long: `A CLI created to get infos about movies and series in TMDB database 📽️. 
 	
 With 'tmdbcli' you can get infos about: 
-- Top rated movies
-- Top popular movies
+- Top rated movies and series
+- Top popular movies and series
 - Movie infos
 - And more.`,
 }
