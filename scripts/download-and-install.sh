@@ -9,16 +9,15 @@ REPO_OWNER="fschossler"
 REPO_NAME="tmdbcli"
 
 # Retrieve the latest release version from GitHub
-VERSION=latest
-
-# Construct the URL for the release asset based on the OS and version
-URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/$VERSION/download/tmdbcli-$VERSION-$OS-amd64.tar.gz"
-
+VERSION=$(curl -s https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/releases/latest | grep -o '"tag_name": ".*"' | cut -d'"' -f4)
 # Define the installation directory (where the binary will be placed)
 INSTALL_DIR="/usr/local/bin"
 
 # Determine the user's operating system
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+
+# Construct the URL for the release asset based on the OS and version
+URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/$VERSION/download/tmdbcli-$VERSION-$OS-amd64.tar.gz"
 
 # Function to handle errors and exit
 handle_error() {
