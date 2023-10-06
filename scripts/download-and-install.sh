@@ -17,7 +17,7 @@ INSTALL_DIR="/usr/local/bin"
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 
 # Construct the URL for the release asset based on the OS and version
-URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/$VERSION/download/tmdbcli-$VERSION-$OS-amd64.tar.gz"
+URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/latest/download/tmdbcli-$VERSION-$OS-amd64.tar.gz"
 
 # Function to handle errors and exit
 handle_error() {
