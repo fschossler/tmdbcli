@@ -49,11 +49,6 @@ extract_tar_gz() {
   local input_file="$1"
   local output_dir="$2"
 
-  # Check if the file is a valid gzip archive
-  if ! gzip -t "$input_file" &>/dev/null; then
-    handle_error "The downloaded file is not a valid gzip archive."
-  fi
-
   # Extract the file
   if ! tar -C "$output_dir" -xzf "$input_file"; then
     handle_error "Failed to extract the tar.gz file."
