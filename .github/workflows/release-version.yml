@@ -26,7 +26,6 @@ jobs:
           asset_name: tmdbcli_linux_amd64.tar.gz
           tag: ${{ github.ref }}
           overwrite: true
-          body: "This is my release text"
       # - name: Just test
       #   run: |
       #     ls ${{ github.workspace }}
