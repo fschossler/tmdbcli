@@ -17,9 +17,9 @@ VERSION="${1:-$DEFAULT_VERSION}"
 
 # Construct the URL for the release asset based on the OS and version
 if [ "$VERSION" == "latest" ]; then
-  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/latest/download/tmdbcli-$VERSION-$OS-amd64.tar.gz"
+  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/latest/download/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
 else
-  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli-$VERSION-$OS-amd64.tar.gz"
+  URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli-v$VERSION-$OS-amd64.tar.gz"
 fi
 
 # Define the installation directory (where the binary will be placed)
@@ -62,4 +62,34 @@ extract_tar_gz() {
 
   # Extract the file
   if ! tar -C "$output_dir" -xzf "$input_file"; then
-    handle
+    handle_error "Failed to extract the tar.gz file."
+  fi
+}
+
+# Check if root privileges are required
+check_sudo
+
+# Download the release asset
+echo "📥 Downloading tmdbcli..."
+download_file "$URL" "/tmp/tmdbcli.tar.gz"
+
+# Extract the binary
+echo "📦 Extracting tmdbcli..."
+extract_tar_gz "/tmp/tmdbcli.tar.gz" "/tmp"
+
+# Move the binary to the installation directory
+echo "🚚 Moving tmdbcli to $INSTALL_DIR (requires sudo)..."
+if ! sudo mv "/tmp/tmdbcli" "$INSTALL_DIR"; then
+  handle_error "Failed to move the binary to $INSTALL_DIR."
+fi
+
+# Cleanup the downloaded tar.gz file
+echo "🧹 Cleaning up..."
+rm -f "/tmp/tmdbcli.tar.gz"
+
+# Check if the binary is now available in the user's PATH
+if command -v tmdbcli &>/dev/null; then
+  echo "✅ Installation complete. You can now use 'tmdbcli' from the command line."
+else
+  handle_error "Installation failed. Please make sure to add $INSTALL_DIR to your PATH."
+fi
