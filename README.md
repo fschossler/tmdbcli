@@ -62,7 +62,10 @@ If you're using VSCode a tip for debug is create the `launch.json` file inside t
             "request": "launch",
             "mode": "auto",
             "program": "main.go",
-            "args": ["movies", "toprated"]
+            "args": ["movies", "toprated"],
+            "env": {
+                "TMDB_CLI_BEARER_TOKEN": "Your Read Access Token"
+            }
         }
     ]
 }
