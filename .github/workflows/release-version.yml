@@ -1,10 +1,10 @@
 name: Release a new version of tmdbcli.
-run-name: ${{ github.actor }} is Releasing a new version 🚀
-on: [push]
-  # release:
-  #   types: [published]
+run-name: ${{ github.actor }} is Releasing a new version of tmdbcli 🚀
+on:
+  release:
+    types: [published]
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository code
@@ -13,7 +13,20 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.20.6'
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: Just test
+      - name: Build Ubuntu 22.04 version
         run: |
-          ls ${{ github.workspace }}
+          GOOS=linux GOARCH=amd64 go build -o tmdbcli -ldflags "-s -w" -v
+          tar -czvf tmdbcli_linux_amd64.tar.gz tmdbcli
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: tmdbcli_linux_amd64.tar.gz
+          asset_name: tmdbcli_linux_amd64.tar.gz
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
+      # - name: Just test
+      #   run: |
+      #     ls ${{ github.workspace }}
+      # - run: echo "🖥️ The workflow is now ready to test your code on the runner."
