@@ -1,15 +1,24 @@
 #!/bin/bash
 
-# Improve error handling
+# Enable robust error handling and consistent character encoding
 set -euf
 LC_CTYPE=C
 
+# Specify the GitHub repository owner and name
 REPO_OWNER="fschossler"
 REPO_NAME="tmdbcli"
+
+# Determine the user's operating system
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+
+# Define the default version or use the provided argument
 DEFAULT_VERSION="latest"
 VERSION="${1:-$DEFAULT_VERSION}"
+
+# Construct the URL for the release asset based on the OS and version
 URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli_v$VERSION-$OS-amd64.tar.gz"
+
+# Define the installation directory (where the binary will be placed)
 INSTALL_DIR="/usr/local/bin"
 
 # Function to handle errors and exit
@@ -33,7 +42,7 @@ download_file() {
   local output_file="$2"
 
   if ! curl -L -o "$output_file" "$url"; then
-    handle_error "❌ Failed to download the file from $url."
+    handle_error "Failed to download the file from $url."
   fi
 }
 
@@ -42,8 +51,14 @@ extract_tar_gz() {
   local input_file="$1"
   local output_dir="$2"
 
+  # Check if the file is a valid gzip archive
+  if ! gzip -t "$input_file" &>/dev/null; then
+    handle_error "The downloaded file is not a valid gzip archive."
+  fi
+
+  # Extract the file
   if ! tar -C "$output_dir" -xzf "$input_file"; then
-    handle_error "❌ Failed to extract the tar.gz file."
+    handle_error "Failed to extract the tar.gz file."
   fi
 }
 
@@ -74,6 +89,3 @@ if command -v tmdbcli &>/dev/null; then
 else
   handle_error "Installation failed. Please make sure to add $INSTALL_DIR to your PATH."
 fi
-
-echo "==========================================================="
-echo "👀 Please don't forget to follow the Requirements in the README for everything works perfectly."
