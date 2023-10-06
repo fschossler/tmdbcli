@@ -1,8 +1,8 @@
 name: Release a new version of tmdbcli.
 run-name: ${{ github.actor }} is Releasing a new version 🚀
-on:
-  release:
-    types: [published]
+on: [push]
+  # release:
+  #   types: [published]
 jobs:
   build:
     runs-on: ubuntu-22.04
