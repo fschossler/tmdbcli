@@ -87,3 +87,6 @@ if command -v tmdbcli &>/dev/null; then
 else
   handle_error "Installation failed. Please make sure to add $INSTALL_DIR to your PATH."
 fi
+
+echo "==========================================================="
+echo "👀 Please don't forget to follow the Requirements in the README for everything works perfectly."
