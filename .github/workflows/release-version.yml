@@ -35,6 +35,6 @@ jobs:
           release_name: "My first release 🚀"
           tag: ${{ github.ref }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: tmdbcli_*
+          file: tmdbcli-*
           file_glob: true
           body: "This is my first release text."
