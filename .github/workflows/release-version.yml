@@ -5,6 +5,7 @@ on:
     types: [published]
 jobs:
   build-and-publish:
+    permissions: write-all
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository code
