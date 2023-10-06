@@ -16,7 +16,7 @@ DEFAULT_VERSION="latest"
 VERSION="${1:-$DEFAULT_VERSION}"
 
 # Construct the URL for the release asset based on the OS and version
-URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli_v$VERSION-$OS-amd64.tar.gz"
+URL="https://github.com/$REPO_OWNER/$REPO_NAME/releases/download/$VERSION/tmdbcli-$VERSION-$OS-amd64.tar.gz"
 
 # Define the installation directory (where the binary will be placed)
 INSTALL_DIR="/usr/local/bin"

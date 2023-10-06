@@ -18,17 +18,17 @@ jobs:
       - name: Build Linux version
         run: |
           GOOS=linux GOARCH=amd64 go build -o tmdbcli -ldflags "-s -w" -v
-          tar -czvf tmdbcli_${GITHUB_REF#refs/*/}_linux_amd64.tar.gz tmdbcli
+          tar -czvf tmdbcli-${GITHUB_REF#refs/*/}-linux-amd64.tar.gz tmdbcli
           rm tmdbcli
       - name: Build MacOS version
         run: |
           GOOS=darwin GOARCH=amd64 go build -o tmdbcli -ldflags "-s -w" -v
-          tar -czvf tmdbcli_${GITHUB_REF#refs/*/}_darwin_amd64.tar.gz tmdbcli
+          tar -czvf tmdbcli-${GITHUB_REF#refs/*/}-darwin-amd64.tar.gz tmdbcli
           rm tmdbcli
       - name: Build Windows version
         run: |
           GOOS=windows GOARCH=amd64 go build -o tmdbcli -ldflags "-s -w" -v
-          tar -czvf tmdbcli_${GITHUB_REF#refs/*/}_windows_amd64.tar.gz tmdbcli
+          tar -czvf tmdbcli-${GITHUB_REF#refs/*/}-windows-amd64.tar.gz tmdbcli
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
