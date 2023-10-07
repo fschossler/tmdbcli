@@ -16,7 +16,6 @@ func RequestPath(path string) string {
 	TMDB_CLI_BEARER_TOKEN := ValidateBearerToken()
 
 	baseUrl := TmdbBaseUrl
-	path += "?"
 	fullUrl := "" + baseUrl + "" + path + ""
 
 	req, _ := http.NewRequest("GET", fullUrl, nil)
@@ -29,6 +28,7 @@ func RequestPath(path string) string {
 	queryParameters := req.URL.Query()
 	queryParameters.Add("language", cmd.Language)
 	queryParameters.Add("page", strconv.Itoa(cmd.Page))
+	req.URL.RawQuery = queryParameters.Encode()
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
