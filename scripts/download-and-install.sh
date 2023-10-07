@@ -30,7 +30,7 @@ download_file() {
   local url="$1"
   local output_file="$2"
 
-  if ! curl -L -o "$output_file" "$url"; then
+  if ! curl -s -L -o "$output_file" "$url"; then
     handle_error "Failed to download the file from $url."
   fi
 }
@@ -40,7 +40,6 @@ extract_tar_gz() {
   local input_file="$1"
   local output_dir="$2"
 
-  # Extract the file
   if ! tar -C "$output_dir" -xzf "$input_file"; then
     handle_error "Failed to extract the tar.gz file."
   fi
@@ -59,7 +58,7 @@ if ! sudo mv "/tmp/tmdbcli" "$INSTALL_DIR"; then
   handle_error "Failed to move the binary to $INSTALL_DIR."
 fi
 
-echo "🧹 Cleaning up..."
+echo "🧹 Cleaning up 'tar.gz' ..."
 rm -f "/tmp/tmdbcli.tar.gz"
 
 # Check if the binary is now available in the user's PATH
@@ -69,5 +68,4 @@ else
   handle_error "Installation failed. Please make sure to add $INSTALL_DIR to your PATH."
 fi
 
-echo "==========================================================="
 echo "👀 Please don't forget to follow the Requirements in the README for everything works perfectly."
