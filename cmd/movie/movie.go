@@ -10,9 +10,9 @@ import (
 var MovieCmd = &cobra.Command{
 	Use:   "movie",
 	Short: "Some informations about movies",
-	Long:  `Some informations about movies. You can check for top-rated movies, synopsis and details about a movie.`,
+	Long:  `Some informations about movies. You can check for Top Rated and Top Popular movies, synopsis and details about a movie.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("movie called")
+		fmt.Println("Check the possible subcommands with the \"tmdbcli movie --help\".")
 	},
 }
 

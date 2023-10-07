@@ -17,8 +17,8 @@ var RootCmd = &cobra.Command{
 	Long: `A CLI created to get infos about movies and series in TMDB database 📽️. 
 	
 With 'tmdbcli' you can get infos about: 
-- Top rated movies and series
-- Top popular movies and series
+- Top Rated movies and series
+- Top Popular movies and series
 - Movie infos
 - And more.`,
 }

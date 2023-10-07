@@ -13,8 +13,8 @@ import (
 
 var topPopularCmd = &cobra.Command{
 	Use:   "toppopular",
-	Short: "Shows Top Popular movies in TMDB database",
-	Long:  `Shows Top Popular movies in TMDB database.`,
+	Short: "Shows Top Popular series in TMDB database",
+	Long:  `Shows Top Popular series in TMDB database.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		err := TopPopular()
 		if err != nil {
