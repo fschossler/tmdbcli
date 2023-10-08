@@ -34,9 +34,9 @@ sh -c "$(curl -sSL https://raw.githubusercontent.com/fschossler/tmdbcli/main/scr
 
 ### Releases Page
 
-- Go to the [Releases page](https://github.com/fschossler/tmdbcli/releases), download and extract the file based on your OS. Remember to put in the $PATH the `tmdbcli`.
+- Go to the [Releases page](https://github.com/fschossler/tmdbcli/releases), download and extract the file based on your OS. Remember to put the `tmdbcli` in a folder that stay inside the environment variable $PATH.
 
-### Available versions
+## Versions 🏷️
 
 **All the available versions are in the** [Releases](https://github.com/fschossler/tmdbcli/releases) page.
 
