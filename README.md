@@ -32,7 +32,7 @@ For example, if you want to install the latest version: `go install github.com/f
 sh -c "$(curl -sSL https://raw.githubusercontent.com/fschossler/tmdbcli/main/scripts/download-and-install.sh)"
 ```
 
-**Releases Page:**
+### Releases Page
 
 - Go to the [Releases page](https://github.com/fschossler/tmdbcli/releases), download and extract the file based on your OS. Remember to put in the $PATH the `tmdbcli`.
 
@@ -62,7 +62,7 @@ If you're using VSCode a tip for debug is create the `launch.json` file inside t
             "request": "launch",
             "mode": "auto",
             "program": "main.go",
-            "args": ["movies", "toprated"],
+            "args": ["movie", "toprated"],
             "env": {
                 "TMDB_CLI_BEARER_TOKEN": "Your Read Access Token"
             }
