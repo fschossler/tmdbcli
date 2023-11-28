@@ -9,7 +9,11 @@ import (
 	"github.com/fschossler/tmdbcli/cmd"
 )
 
-const TmdbBaseUrl = "https://api.themoviedb.org/3"
+var TmdbBaseUrl = "https://api.themoviedb.org/3"
+
+func SetBaseURL(url string) {
+	TmdbBaseUrl = url
+}
 
 func RequestPath(path string) string {
 
