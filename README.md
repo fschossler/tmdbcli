@@ -9,6 +9,8 @@ With 'tmdbcli' you can get infos about:
 
 This project **IS NOT** created by [TMDB (The Movie Database)](https://www.themoviedb.org/) team. This project was created just to people that really like movies, series and love CLI too. Ensure your use case does not violate their API terms of service.
 
+![using a color picker](demo.gif)
+
 ## Requirements 🛠️
 
 - TMDB's API Key 
