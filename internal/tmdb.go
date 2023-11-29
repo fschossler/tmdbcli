@@ -1,10 +1,12 @@
 package internal
 
 import (
+	"context"
 	"io"
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/fschossler/tmdbcli/cmd"
 )
@@ -33,6 +35,11 @@ func RequestPath(path string) string {
 	queryParameters.Add("language", cmd.Language)
 	queryParameters.Add("page", strconv.Itoa(cmd.Page))
 	req.URL.RawQuery = queryParameters.Encode()
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	req = req.WithContext(ctx)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
