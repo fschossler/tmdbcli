@@ -13,7 +13,7 @@ jobs:
           go-version: '1.20.6'
       - name: Go Unit tests
         run: |
-          go test ./... -count=1
+          TMDB_CLI_BEARER_TOKEN=${{ secrets.TMDB_CLI_BEARER_TOKEN }} go test ./... -count=1
     #   - name: SonarQube
     #     run: |
     #       go test ./... -count=1
