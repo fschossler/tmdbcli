@@ -45,13 +45,13 @@ func TopRated() error {
 		return err
 	}
 
-	for _, movie := range serie.Results {
+	for _, serie := range serie.Results {
 		title := color.New(color.FgHiCyan)
 		voteAverage := color.New(color.FgGreen)
 
-		title.Print(movie.Name + ": ")
-		voteAverage.Println(movie.VoteAverage)
-		fmt.Println(movie.Overview)
+		title.Print(serie.Name + ": ")
+		voteAverage.Printf("%.1f\n", serie.VoteAverage)
+		fmt.Println(serie.Overview)
 		fmt.Println("")
 	}
 

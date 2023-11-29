@@ -50,7 +50,7 @@ func TopPopular() error {
 		voteAverage := color.New(color.FgGreen)
 
 		title.Print(serie.Name + ": ")
-		voteAverage.Println(serie.VoteAverage)
+		voteAverage.Printf("%.1f\n", serie.VoteAverage)
 		fmt.Println(serie.Overview)
 		fmt.Println("")
 	}
