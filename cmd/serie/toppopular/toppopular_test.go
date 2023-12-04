@@ -18,7 +18,6 @@ func TestTopPopular(t *testing.T) {
 	}))
 	defer server.Close()
 
-	// Set the base URL for the internal package to the mock server's URL
 	internal.SetBaseURL(server.URL)
 
 	err := TopPopular()

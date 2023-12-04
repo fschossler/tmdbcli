@@ -21,8 +21,7 @@ func RequestPath(path string) string {
 
 	TMDB_CLI_BEARER_TOKEN := ValidateBearerToken()
 
-	baseUrl := TmdbBaseUrl
-	fullUrl := "" + baseUrl + "" + path + ""
+	fullUrl := "" + TmdbBaseUrl + "" + path + ""
 
 	req, _ := http.NewRequest("GET", fullUrl, nil)
 

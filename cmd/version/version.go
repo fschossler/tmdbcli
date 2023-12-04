@@ -14,7 +14,7 @@ var versionCmd = &cobra.Command{
 	Short: "Version of the tmdbcli",
 	Long:  "Version of the tmdbcli",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Version of the tmdbli:", version)
+		fmt.Println("Version of the tmdbcli:", version)
 	},
 }
 
