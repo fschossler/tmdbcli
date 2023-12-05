@@ -8,10 +8,7 @@ import (
 
 func ValidateBearerToken() string {
 
-	err := godotenv.Load()
-	if err != nil {
-		return "Error loading .env file."
-	}
+	godotenv.Load()
 
 	tmdbToken := os.Getenv("TMDB_CLI_BEARER_TOKEN")
 

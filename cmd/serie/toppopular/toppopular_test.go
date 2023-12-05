@@ -18,7 +18,8 @@ func TestTopPopular(t *testing.T) {
 	}))
 	defer server.Close()
 
-	internal.SetBaseURL(server.URL)
+	//internal.SetBaseURL(server.URL)
+	internal.RequestPath(internal.UrlParams{BaseUrl: server.URL})
 
 	err := TopPopular()
 	assert.NoError(t, err)

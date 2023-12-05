@@ -11,17 +11,28 @@ import (
 	"github.com/fschossler/tmdbcli/cmd"
 )
 
-var TmdbBaseUrl = "https://api.themoviedb.org/3"
-
-func SetBaseURL(url string) {
-	TmdbBaseUrl = url
+type UrlParams struct {
+	Path    string
+	BaseUrl string
 }
 
-func RequestPath(path string) string {
+var TmdbBaseUrl = "https://api.themoviedb.org/3"
+
+// func SetBaseURL(url string) {
+// 	TmdbBaseUrl = url
+// }
+
+func RequestPath(url UrlParams) string {
 
 	TMDB_CLI_BEARER_TOKEN := ValidateBearerToken()
 
-	fullUrl := "" + TmdbBaseUrl + "" + path + ""
+	var fullUrl string
+
+	if url.BaseUrl != "" {
+		fullUrl = TmdbBaseUrl + url.BaseUrl
+	} else {
+		fullUrl = "" + TmdbBaseUrl + "" + url.Path + ""
+	}
 
 	req, _ := http.NewRequest("GET", fullUrl, nil)
 

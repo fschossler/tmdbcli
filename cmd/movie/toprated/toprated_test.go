@@ -18,7 +18,8 @@ func TestTopRated(t *testing.T) {
 	}))
 	defer server.Close()
 
-	internal.SetBaseURL(server.URL)
+	//internal.SetBaseURL(server.URL)
+	internal.RequestPath(internal.UrlParams{BaseUrl: server.URL})
 
 	err := TopRated()
 	assert.NoError(t, err)

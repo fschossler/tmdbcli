@@ -36,7 +36,7 @@ type Results struct {
 
 func TopPopular() error {
 
-	jsonReturn := internal.RequestPath("/tv/popular")
+	jsonReturn := internal.RequestPath(internal.UrlParams{Path: "/tv/popular"})
 
 	var serie Root
 
