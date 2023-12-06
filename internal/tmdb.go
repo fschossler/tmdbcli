@@ -18,23 +18,17 @@ type UrlParams struct {
 
 var TmdbBaseUrl = "https://api.themoviedb.org/3"
 
-// func SetBaseURL(url string) {
-// 	TmdbBaseUrl = url
-// }
-
 func RequestPath(url UrlParams) string {
 
 	TMDB_CLI_BEARER_TOKEN := ValidateBearerToken()
 
-	var fullUrl string
-
 	if url.BaseUrl != "" {
-		fullUrl = TmdbBaseUrl + url.BaseUrl
+		TmdbBaseUrl += url.BaseUrl
 	} else {
-		fullUrl = "" + TmdbBaseUrl + "" + url.Path + ""
+		TmdbBaseUrl += url.Path
 	}
 
-	req, _ := http.NewRequest("GET", fullUrl, nil)
+	req, _ := http.NewRequest("GET", TmdbBaseUrl, nil)
 
 	// Headers
 	req.Header.Add("accept", "application/json")
