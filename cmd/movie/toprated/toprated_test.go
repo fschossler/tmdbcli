@@ -18,8 +18,8 @@ func TestTopRated(t *testing.T) {
 	}))
 	defer server.Close()
 
-	// Set the base URL for the internal package to the mock server's URL
-	internal.SetBaseURL(server.URL)
+	//internal.SetBaseURL(server.URL)
+	internal.RequestPath(internal.UrlParams{BaseUrl: server.URL})
 
 	err := TopRated()
 	assert.NoError(t, err)

@@ -1,13 +1,20 @@
 package internal
 
-import "os"
+import (
+	"os"
 
-var TMDB_CLI_BEARER_TOKEN string = os.Getenv("TMDB_CLI_BEARER_TOKEN")
+	"github.com/joho/godotenv"
+)
 
 func ValidateBearerToken() string {
-	if TMDB_CLI_BEARER_TOKEN == "" {
+
+	godotenv.Load()
+
+	tmdbToken := os.Getenv("TMDB_CLI_BEARER_TOKEN")
+
+	if tmdbToken == "" {
 		panic("You need to create your API Key and put your your bearer token in the environment variable 'TMDB_CLI_BEARER_TOKEN'. Check more infos on how to do this in the docs.")
 	}
 
-	return TMDB_CLI_BEARER_TOKEN
+	return tmdbToken
 }

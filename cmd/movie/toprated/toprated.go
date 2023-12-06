@@ -36,7 +36,7 @@ type Results struct {
 
 func TopRated() error {
 
-	jsonReturn := internal.RequestPath("/movie/top_rated")
+	jsonReturn := internal.RequestPath(internal.UrlParams{Path: "/movie/top_rated"})
 
 	var movie Root
 
